@@ -4,13 +4,19 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use App\Repository\AdRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=AdRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ *  fields = {"title"},
+ *  message = "Une autre annonce possède dèja ce titre, merci de le modifier"
+ * )
  */
 class Ad
 {
@@ -23,6 +29,8 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min= 10, max= 255, minMessage= "Le titre doit faire plus que 10 caractères!",
+     * maxMessage= "le titre ne peut pas faire plus que 255 caractères" )
      */
     private $title;
 
@@ -38,16 +46,19 @@ class Ad
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min= 20, minMessage= "Votre introduction doit faire plus que 20 caractères!")
      */
     private $introduction;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min= 100, minMessage= "Votre description doit faire plus que 100 caractères!")
      */
-    private $content;
+    private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $coverImage;
 
@@ -58,6 +69,7 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="ad", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $images;
 
@@ -178,19 +190,19 @@ class Ad
      *
      * @return string|null
      */
-    public function getContent(): ?string
+    public function getDescription(): ?string
     {
-        return $this->content;
+        return $this->description;
     }
 
     /**
-     * @param string $content
+     * @param string $description
      * 
      * @return Ad
      */
-    public function setContent(string $content): Ad
+    public function setDescription(string $description): Ad
     {
-        $this->content = $content;
+        $this->description = $description;
 
         return $this;
     }
