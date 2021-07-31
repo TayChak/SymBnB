@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Ad;
 use App\Form\ImageType;
-use Symfony\Component\Form\AbstractType;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -14,26 +14,15 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class AdType extends AbstractType
+class AdType extends ApplicationType
 {
-    /**
-     * @param string $label
-     * @param string $placeholder
-     * @param boolean $required
-     * 
-     * @return array
-     */
-    private function getConfiguration(string $label, string $placeholder, bool $required = true): array
-    {
-        return [
-            'label' => $label,
-            'required' => $required,
-            'attr'  => [
-                'placeholder' => $placeholder,
-            ]
-        ];
-    }
 
+    /**
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

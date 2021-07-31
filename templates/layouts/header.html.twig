@@ -34,16 +34,25 @@
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form>
              <ul class="navbar-nav ml-auto">
+             {% if app.user %}
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Mon Compte</a>
+                    <a href="{{path('account_logout')}}" class="nav-link">Déconnexion</a>
                 </li>
+             {% else %}
+              <li class="nav-item">
+                    <a href="{{path('account_register')}}" class="nav-link">Inscription</a>
+                </li>
+                 <li class="nav-item">
+                    <a href="{{path('account_login')}}" class="nav-link">Connexion</a>
+                </li>
+             {% endif %}
             </ul>
         </div>
     </div>
 </nav>
 {% for label, messages in app.flashes %}
     <div class="container">
-        <div class="alert alert-{{ label }}">
+        <div class="alert alert-{{ label }} mt-4 text-center">
             {% for message in messages %}
                 <p>{{ message | raw }}</p>
             {% endfor %}
