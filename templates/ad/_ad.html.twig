@@ -20,6 +20,11 @@
                 </p>
                 <div class="text-center">
                     <a href="{{ url }}" class="btn btn-light">En savoir plus !</a>
+                    {% if app.user is same as (ad.author) %}
+                    <a href="{{path('ads_update', {'slug' : ad.slug })}}" class="btn btn-danger">
+                        Modifier l'annonce
+                    </a>
+                    {% endif %}
                 </div>
                         
             </div>

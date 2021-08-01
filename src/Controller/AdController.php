@@ -10,6 +10,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdController extends AbstractController
@@ -29,6 +31,7 @@ class AdController extends AbstractController
 
     /**
      * @Route("/ads/new", name="ads_create")
+     * @IsGranted("ROLE_USER")
      *
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -72,6 +75,7 @@ class AdController extends AbstractController
 
     /**
      * @Route("/ads/{slug}/update", name="ads_update")
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message="Cette annonce ne vous appartient pas, vous ne pouvez pas la modifier !")
      *
      * @param Ad $ad
      * @param Request $request
@@ -121,5 +125,26 @@ class AdController extends AbstractController
         return $this->render('ad/show.html.twig', [
             'ad' => $ad,
         ]);
+    }
+
+    /**
+     * @Route("/ads/{slug}/delete", name="ads_delete")
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message="Cette annonce ne vous appartient pas, vous ne pouvez pas la supprimer !")
+     *
+     * @param Ad $ad
+     * @param EntityManagerInterface $manager
+     * @return Response
+     * 
+     */
+    public function delete(Ad $ad, EntityManagerInterface $manager): Response
+    {
+        $manager->remove($ad);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "L'annonce <strong>{$ad->getTitle()}</strong> a bien été supprimé !"
+        );
+        return $this->redirectToRoute('ads_index');
     }
 }
