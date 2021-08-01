@@ -79,6 +79,18 @@ class AccountController extends AbstractController
     }
 
     /**
+     * @Route("/account", name="account_index")
+     *
+     * @return Response
+     */
+    public function myAccount(): Response
+    {
+        return $this->render('user/show.html.twig', [
+            'user' => $this->getUser(),
+        ]);
+    }
+
+    /**
      * @Route("/account/profile",name="account_profile")
      * @param Request $request
      * @param EntityManagerInterface $manager
