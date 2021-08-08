@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}404 Error{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Page not found</h1>
+
+        <p>
+            The requested page couldn't be located. Checkout for any URL
+            misspelling or <a href="{{ path('homepage') }}">return to the homepage</a>.
+        </p>
+        <a href="{{ path('homepage') }}">
+            <img src="{{ asset('images/404-error.jpg')}}" alt="404-error-image" width="100%">
+        </a>
+    </div>
+{% endblock %}
