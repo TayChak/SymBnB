@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}500 Internal Server Error{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Internal Server Error</h1>
+
+        <p>
+            The requested page couldn't be located. An Internal Server Error has occurred 
+            please Checkout your configuration or <a href="{{ path('homepage') }}">return to the homepage</a>.
+        </p>
+        <a href="{{ path('homepage') }}">
+            <img src="{{ asset('images/500-error.jpg')}}" alt="500-error-image" width="100%">
+        </a>
+    </div>
+{% endblock %}
