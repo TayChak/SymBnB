@@ -13,7 +13,7 @@
             </strong> par nuit
         </p>
         <div class="text-center">
-            <a href="#" class="btn btn-primary">Réserver !</a>
+            <a href="{{path('booking', {'slug' : ad.slug })}}" class="btn btn-primary">Réserver !</a>
             {% if app.user is same as (ad.author) %}
                 <a href="{{path('ads_delete', {'slug' : ad.slug })}}" class="btn btn-danger">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">

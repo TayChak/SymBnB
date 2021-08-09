@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver l'annonce : {{ ad.title }} !{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Réserver l'annonce : {{ ad.title }}</h1>
+    <p>
+        Vous êtes sur le point de réserver le bien de <stong style="color:#b58900"> {{ad.author.fullName}} </stong>, 
+        dites nous tout, on s'occupe du reste !!
+    </p>
+    {{ form_start(form) }}
+    <div class="alert alert-light">
+        <h2>Commencez par nous dire quelles sont les dates qui vous intéressent !</h2>
+        <div class="row">
+            <div class="col">
+                {{ form_errors(form.startDate) }}
+                {{ form_row(form.startDate) }}
+            </div>
+            <div class="col">
+                {{ form_errors(form.endDate) }}
+                {{ form_row(form.endDate) }}
+            </div>
+        </div>
+    </div>
+    <h4>Montant du séjour : <span id="amount">...</span> &euro; </h4>
+    <span id="days">0</span> nuit(s) à {{ad.price}} / nuit
+
+    <h2>Vous avez un commentaire ?</h2>
+        {{ form_errors(form.comment) }}
+        {{ form_row(form.comment) }}
+    <h2 class="mt-3">Vous avez terminé !</h2>
+    <p>Vacances de rêve ? Hébergement pour le boulot ? peu importe, on est avec vous !</p>
+
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary my-3">Je Réserve</button>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
+{% block javascripts %}
+{{parent()}}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function() {
+        $.datepicker;
+
+        // you may need to change this code if you are not using Bootstrap Datepicker
+        $('.js-datepicker').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+			dateFormat: 'dd/mm/yy',
+            showOn: "button",
+            buttonImage: "{{ asset('images/calendar.gif')}}",
+            buttonImageOnly: true,
+            buttonText: "Select date"
+        });
+
+    });
+</script>
+{% endblock %}
