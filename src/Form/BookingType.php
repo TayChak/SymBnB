@@ -8,18 +8,30 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\DataTransformer\FrenchToDateTimeTransformer;
 
 class BookingType extends ApplicationType
 {
+    /**
+     * @var FrenchToDateTimeTransformer
+     */
+    private $transformer;
+
+    public function __construct(FrenchToDateTimeTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
                 'startDate',
-                DateType::class,
+                //DateType::class,
+                TextType::class,
                 [
                     'label' => 'Date d\'arrivée',
-                    'widget' => 'single_text',
+                    //'widget' => 'single_text',
                    // 'html5'  => false,
                     'attr' => [
                      //   'class' => 'js-datepicker',
@@ -29,10 +41,11 @@ class BookingType extends ApplicationType
             )
             ->add(
                 'endDate',
-                DateType::class,
+                //DateType::class,
+                TextType::class,
                 [
                     'label' => 'Date de départ',
-                    'widget' => 'single_text',
+                    //'widget' => 'single_text',
                     //'html5'  => false,
                     'attr' => [
                         //'class' => 'js-datepicker',
@@ -46,6 +59,9 @@ class BookingType extends ApplicationType
                 $this->getConfiguration(' ', 'Rédigez votre commentaire ici !!', false)
             )
         ;
+
+        $builder->get('startDate')->addModelTransformer($this->transformer);
+        $builder->get('endDate')->addModelTransformer($this->transformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)

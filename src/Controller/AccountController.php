@@ -159,4 +159,14 @@ class AccountController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/account/bookings", name="account_bookings")
+     *
+     * @return Response
+     */
+    public function bookings(): Response
+    {
+        return $this->render('account/bookings.html.twig');
+    }
 }

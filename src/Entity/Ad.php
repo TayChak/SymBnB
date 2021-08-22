@@ -106,6 +106,33 @@ class Ad
     }
 
     /**
+     *
+     * @return array
+     */
+    public function getNotAvailableDays(): array 
+    {
+        $notAvailableDays = [];
+
+        foreach($this->bookings as $booking) {
+            // Calculer les jours qui se trouvent entre la date d'arrivée et de départ
+            $resultat = range(
+                $booking->getStartDate()->getTimestamp(), 
+                $booking->getEndDate()->getTimestamp(), 
+                24 * 60 * 60
+            );
+            
+            $days = array_map(function($dayTimestamp){
+                return new \DateTime(date('Y-m-d', $dayTimestamp));
+            }, $resultat);
+
+            $notAvailableDays = array_merge($notAvailableDays, $days);
+        }
+
+        return $notAvailableDays;
+    }
+
+
+    /**
      * 
      * @return integer|null
      */
@@ -272,9 +299,9 @@ class Ad
     /**
      * @param Image $image
      * 
-     * @return self
+     * @return Ad
      */
-    public function addImage(Image $image): self
+    public function addImage(Image $image): Ad
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
@@ -287,11 +314,12 @@ class Ad
     /**
      * @param Image $image
      * 
-     * @return self
+     * @return Ad
      */
-    public function removeImage(Image $image): self
+    public function removeImage(Image $image): Ad
     {
-        if ($this->images->removeElement($image)) {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
             // set the owning side to null (unless already changed)
             if ($image->getAd() === $this) {
                 $image->setAd(null);
@@ -301,12 +329,20 @@ class Ad
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * @param User|null $author
+     * 
+     * @return Ad
+     */
+    public function setAuthor(?User $author): Ad
     {
         $this->author = $author;
 
@@ -321,7 +357,12 @@ class Ad
         return $this->bookings;
     }
 
-    public function addBooking(Booking $booking): self
+    /**
+     * @param Booking $booking
+     * 
+     * @return Ad
+     */
+    public function addBooking(Booking $booking): Ad
     {
         if (!$this->bookings->contains($booking)) {
             $this->bookings[] = $booking;
@@ -331,9 +372,15 @@ class Ad
         return $this;
     }
 
-    public function removeBooking(Booking $booking): self
+    /**
+     * @param Booking $booking
+     * 
+     * @return Ad
+     */
+    public function removeBooking(Booking $booking): Ad
     {
-        if ($this->bookings->removeElement($booking)) {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
             // set the owning side to null (unless already changed)
             if ($booking->getAd() === $this) {
                 $booking->setAd(null);
