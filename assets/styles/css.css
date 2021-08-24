@@ -1,4 +1,4 @@
-div.container {
+div.container , div.container-fluid {
     margin-top: 20px;
 }
 
@@ -13,10 +13,15 @@ div.title h1, div.title p {
     text-shadow: 3px 3px 3px rgb(0,0,0,0.5);
 }
 
+div.title .btn {
+    margin-top: 2em;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
 div.carousel-caption {
     text-shadow: 3px 3px 3px rgb(0,0,0,0.5);
 }
-
 
 .avatar {
     max-width: 128px;
@@ -41,3 +46,11 @@ div.carousel-caption {
 span.rating i {
     color: goldenrod;
 } 
+
+.alert a {
+    text-decoration: none;
+}
+
+.alert .btn {
+   color: white;
+}
