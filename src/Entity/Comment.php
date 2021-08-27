@@ -67,19 +67,19 @@ class Comment
 
     /**
      *
-     * @return \DateTimeImmutable|null
+     * @return \DateTime|null
      */
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTimeImmutable $createdAt
+     * @param \DateTime $createdAt
      * 
      * @return Comment
      */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): Comment
+    public function setCreatedAt(\DateTime $createdAt): Comment
     {
         $this->createdAt = $createdAt;
 
