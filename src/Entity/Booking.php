@@ -103,7 +103,7 @@ class Booking
 
     /**
      *
-     * @return array²
+     * @return array
      */
     public function getDays(): array 
     {
@@ -122,9 +122,9 @@ class Booking
     
     /**
      *
-     * @return void
+     * @return integer|null
      */
-    public function getDuration()
+    public function getDuration(): ?int
     {
         $diff = $this->endDate->diff($this->startDate);
         return $diff->days;
