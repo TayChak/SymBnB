@@ -9,11 +9,11 @@
 <div class="container">
     <h1>Réserver l'annonce : <em>{{ ad.title }}</em></h1>
     <p>
-        Vous êtes sur le point de réserver le bien de <stong style="color:#b58900"> {{ad.author.fullName}} </stong>, 
+        Vous êtes sur le point de réserver le bien de <stong style="color:#2780e3"> {{ad.author.fullName}} </stong>, 
         dites nous tout, on s'occupe du reste !!
     </p>
     {{ form_start(form) }}
-    <div class="alert alert-light">
+    <div class="alert alert-dark">
         <h2 class="h4">Commencez par nous dire quelles sont les dates qui vous intéressent !</h2>
         <div class="row">
             <div class="col">
@@ -26,7 +26,11 @@
             </div>
         </div>
         <h4 class="mt-3">Montant du séjour : <span id="amount">...</span> &euro; </h4>
-        <span id="days">0</span> nuit(s) à {{ ad.price | number_format(2, ',', ' ') }} &euro;  par nuit
+        <span id="days" style="color:#2780e3">0</span> nuit(s) à 
+            <span style="color:#2780e3">
+                {{ ad.price | number_format(2, ',', ' ') }}
+            </span> 
+        &euro;  par nuit
 
         <h2 class="mt-3">Vous avez un commentaire ?</h2>
             {{ form_errors(form.comment) }}
@@ -37,7 +41,9 @@
     <p>Vacances de rêve ? Hébergement pour le boulot ? peu importe, on est avec vous !</p>
 
     <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary my-3">Je Réserve</button>
+        <button type="submit" class="btn btn-success my-3">
+            <i class="far fa-calendar-check"></i> Je Réserve
+        </button>
     </div>
 
     {{ form_end(form) }}
@@ -86,6 +92,7 @@
 
                 $('#days').text(days);
                 $('#amount').text(amount.toLocaleString('fr-FR'));
+                $('#amount').css("color", "#ff0000");
             }
         }
     

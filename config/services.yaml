@@ -32,3 +32,7 @@ services:
     App\DataFixtures\:
         resource: '../src/DataFixtures'
         tags: [doctrine.fixture.orm]
+    
+    App\Service\PaginationService:
+        arguments:
+            $templatePath: 'admin/layouts/pagination.html.twig'

@@ -8,17 +8,17 @@
             <div class="col-3 text-center">
                 <img src="{{ user.picture}}" class="avatar mb-3" alt="Avatar de {{ user.fullName }}">
                 <br>
-                <span class="badge bg-info">{{ user.ads|length }}  annonces</span>
+                <span class="badge bg-warning">{{ user.ads|length }}  annonces</span>
             </div>
             <div class="col-9">
                 <h1>{{ user.fullName }}</h1>
                 {% if user is same as (app.user) %}
                     <div class="mt-3">
-                        <a href="{{ path('account_profile') }}" class="btn btn-info mr-2 mb-2">
-                            Modifier Profile    
+                        <a href="{{ path('account_profile') }}" class="btn btn-outline-primary mr-2 mb-2">
+                            <i class="fas fa-user-circle"></i> Modifier Profile    
                         </a>
-                        <a href="{{ path('account_password') }}" class="btn btn-info mb-2">
-                            Modifier Mot de passe    
+                        <a href="{{ path('account_password') }}" class="btn btn-outline-danger mb-2">
+                            <i class="fas fa-key"></i> Modifier Mot de passe    
                         </a>
                     </div>
                 {% endif %}
@@ -37,7 +37,7 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <div class="alert alert-warning">
+                <div class="alert alert-danger">
                     <p>
                         <strong>{{ user.fullName }}</strong> n'a pas encore d'annonce sur le site !
                     </p>

@@ -27,7 +27,7 @@
 
     <div class="row">
         <div class="col">
-            <div class="alert alert-light">
+            <div class="alert alert-primary">
                 <h2 class="alert-heading">Détails</h2>
                 <dl class="row">
                     <dt class="col-md-4">Numéro :</dt>
@@ -56,15 +56,15 @@
                                 {{ author.fullName }}
                             </a>
                         </h4>
-                        <span class="badge bg-info">{{ author.ads|length }} annonces </span>
+                        <span class="badge bg-warning">{{ author.ads|length }} annonces </span>
                     </div>
                 </div>
                 {{ author.description|raw }}
-                <a href="{{ path('show_user', {'slug': author.slug}) }}" class="btn btn-info" style="text-decoration: none;">
+                <a href="{{ path('show_user', {'slug': author.slug}) }}" class="btn btn-dark" style="text-decoration: none;">
                     Plus d'info sur {{ author.firstName }} !
                 </a>
             </div>
-            <div class="alert alert-light" id="comment"> 
+            <div class="alert alert-primary" id="comment"> 
                 <h2 class="alert-heading">Votre Avis compte !</h2>
                 {% if date() > date(booking.endDate) %}
                     {% set comment = booking.ad.commentFromAuthor(app.user) %}
@@ -77,7 +77,9 @@
                         {% else %}
                             {{ form_start(form) }}
                             {{ form_widget(form) }}
-                            <button type="submit" class="btn btn-success mt-3">Confirmer !</button>
+                            <button type="submit" class="btn btn-success mt-3">
+                                <i class="far fa-check-square"></i> Confirmer !
+                            </button>
                             {{ form_end(form) }}
                         {% endif %}
                 {% else %}
@@ -86,7 +88,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="alert alert-light">
+            <div class="alert alert-primary">
                 <h2 class="alert-heading">Votre Hébergement</h2>
                 <h4>
                     <a href="{{ path('ads_show', {'slug': ad.slug}) }}" class="btn btn-success" style="text-decoration: none;">
@@ -95,7 +97,7 @@
                 </h4>
                 <img src="{{ ad.coverImage }}" alt="Image de {{ad.title}}" class="img-fluid mb-3">
                 {{ ad.description|raw }}
-                 <a href="{{ path('ads_show', {'slug': ad.slug}) }}" class="btn btn-info" style="text-decoration: none;">
+                 <a href="{{ path('ads_show', {'slug': ad.slug}) }}" class="btn btn-dark" style="text-decoration: none;">
                     Plus d'informations !
                 </a>
             </div>
