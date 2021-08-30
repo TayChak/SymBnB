@@ -15,7 +15,7 @@
             </a>
             <div class="card-body">
                 <h4 class="card-title">
-                    <a href="{{ url }}" style="text-decoration: none; color: #ffffff">
+                    <a href="{{ url }}" style="text-decoration: none; color: #daa520">
                         {{ ad.title }}
                     </a>
                 </h4>
@@ -23,7 +23,7 @@
                     {{ ad.introduction }}
                 </p>
                 <div class="text-center">
-                    <a href="{{ url }}" class="btn {{ ad.id is even ? 'btn-primary': 'btn-outline-primary' }}">En savoir plus !</a>
+                    <a href="{{ url }}" class="btn btn-outline-primary">En savoir plus !</a> {# {{ ad.id is even ? 'btn-primary': 'btn-outline-primary' }} #}
                     {% if app.user is same as (ad.author) %}
                     <a href="{{path('ads_update', {'slug' : ad.slug })}}" class="btn btn-outline-danger">
                         Modifier l'annonce
