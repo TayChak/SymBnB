@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-gold">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{path('homepage')}}">SymBnB !</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" 
@@ -30,13 +30,23 @@
                                 {{ app.user.fullName }}"> {{ app.user.fullName }}
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{path('ads_create')}}">Crée une annonce</a>
+                            <a class="dropdown-item" href="{{path('ads_create')}}">
+                                <i class="far fa-calendar-plus"></i> Crée une annonce
+                            </a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{path('account_index')}}">Mon Compte</a>
-                            <a class="dropdown-item" href="{{path('account_bookings')}}">Mes réservations</a>
-                            <a class="dropdown-item" href="{{path('account_profile')}}">Modifier profil</a>
+                            <a class="dropdown-item" href="{{path('account_index')}}">
+                                <i class="far fa-user"></i> Mon Compte
+                            </a>
+                            <a class="dropdown-item" href="{{path('account_bookings')}}">
+                                <i class="far fa-calendar-alt"></i> Mes réservations
+                            </a>
+                            <a class="dropdown-item" href="{{path('account_profile')}}">
+                                <i class="far fa-address-card"></i> Modifier profil
+                            </a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{path('account_logout')}}">Déconnexion</a>
+                            <a class="dropdown-item" href="{{path('account_logout')}}">
+                                <i class="fas fa-sign-out-alt"></i> Déconnexion
+                            </a>
                         </div>
                     </li>
                 {% else %}
